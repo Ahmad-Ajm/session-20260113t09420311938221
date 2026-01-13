@@ -1,45 +1,91 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
   background-color: #f7f7f7;
   color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 1rem;
 }
 
 .header {
   background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
-  padding: 16px;
-  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.logo {
+  font-size: 1.4rem;
   font-weight: bold;
 }
 
 .content {
-  padding: 24px;
+  padding: 2rem 1rem;
 }
 
-.placeholder {
-  background: #fff;
-  padding: 16px;
-  margin-bottom: 24px;
+.hero {
+  margin-bottom: 2rem;
 }
 
-.cv-list .card {
-  background: #fff;
-  padding: 12px;
-  margin-bottom: 12px;
+.hero h1 {
+  margin-bottom: 0.5rem;
+}
+
+.cv-preview {
+  background: #ffffff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 6px;
+}
+
+.cv-card {
+  margin-top: 1rem;
+  padding: 1rem;
   border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+.cv-card h3 {
+  margin-bottom: 0.25rem;
+}
+
+.job-title {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.cv-list {
+  margin-bottom: 2rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  background: #ffffff;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
 }
 
 .footer {
   background-color: #ffffff;
-  border-top: 1px solid #ddd;
-  padding: 12px;
+  border-top: 1px solid #e0e0e0;
   text-align: center;
-  font-size: 14px;
-}
-
-@media (max-width: 600px) {
-  .content {
-    padding: 12px;
-  }
+  padding: 1rem 0;
+  font-size: 0.9rem;
 }
