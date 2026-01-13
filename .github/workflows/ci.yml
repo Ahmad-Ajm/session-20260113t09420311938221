@@ -36,9 +36,14 @@ jobs:
         run: |
           cd ${{ env.FRONTEND_DIR }} || exit 0
           if [ -f package.json ]; then
-            npm ci
+            if [ -f package-lock.json ]; then
+              npm ci
+            else
+              echo "No package-lock.json found, running npm install instead."
+              npm install
+            fi
           else
-            echo "No frontend project found, skipping npm ci."
+            echo "No frontend project found, skipping npm install."
           fi
 
       - name: Build frontend (if script exists)
