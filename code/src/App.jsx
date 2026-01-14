@@ -1,5 +1,5 @@
-import Layout from '../ui/Layout';
+import Layout from '../ui/Layout'
 
 export default function App() {
-  return <Layout />;
+  return <Layout />
 }
