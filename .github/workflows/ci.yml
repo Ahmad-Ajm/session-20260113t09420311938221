@@ -1,4 +1,4 @@
-name: CI Validation
+name: Feature Validation
 
 on:
   workflow_dispatch:
@@ -13,11 +13,22 @@ on:
         type: string
 
 jobs:
-  validate:
+  check:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Run validation
+      - name: Validate
         run: |
-          echo "CI Validation for ${{ github.event.inputs.featureKey }}"
-          echo "All good!"
+          echo "=== Validating ${{ github.event.inputs.featureKey }} ==="
+          echo "Checking file structure..."
+          
+          # Check basic structure
+          if [ -d "code" ]; then
+            echo "✅ Code directory exists"
+            echo "Contents:"
+            find code -type f | sort
+          else
+            echo "❌ Code directory missing"
+          fi
+          
+          echo "=== Validation complete ==="
