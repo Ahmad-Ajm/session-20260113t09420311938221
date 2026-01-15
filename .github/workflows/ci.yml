@@ -103,9 +103,9 @@ jobs:
           if [ -f index.html ]; then
             echo "HTML file content check:"
             echo "1. DOCTYPE: $(grep -q 'DOCTYPE' index.html && echo '✓' || echo '✗')"
-            echo "2. Arabic lang: $(grep -q 'lang=\"ar\"' index.html && echo '✓' || echo '✗')"
-            echo "3. RTL dir: $(grep -q 'dir=\"rtl\"' index.html && echo '✓' || echo '✗')"
-            echo "4. React root: $(grep -q 'id=\"root\"' index.html && echo '✓' || echo '✗')"
+            echo "2. Arabic lang: $(grep -q 'lang="ar"' index.html && echo '✓' || echo '✗')"
+            echo "3. RTL dir: $(grep -q 'dir="rtl"' index.html && echo '✓' || echo '✗')"
+            echo "4. React root: $(grep -q 'id="root"' index.html && echo '✓' || echo '✗')"
             
             echo ""
             echo "Sample of index.html (first 15 lines):"
@@ -201,7 +201,7 @@ jobs:
           # Create artifact file
           mkdir -p artifacts
           echo "CI Validation Successful" > artifacts/validation-result.txt
-          echo "Feature: FEAT-UX-BASE" >> artifacts/validation-result.txt
+          echo "Feature: ${{ github.event.inputs.featureKey || 'FEAT-UX-BASE' }}" >> artifacts/validation-result.txt
           echo "All requirements met for static base UI" >> artifacts/validation-result.txt
 
       - name: Update progress report
