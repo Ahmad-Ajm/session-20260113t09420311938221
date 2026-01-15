@@ -1,4 +1,4 @@
-name: CI Test
+name: CI Pipeline
 
 on:
   workflow_dispatch:
@@ -13,9 +13,12 @@ on:
         type: string
 
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Test
-        run: echo "Test passed for ${{ github.event.inputs.featureKey }}"
+      - name: Validate
+        run: |
+          echo "Starting validation..."
+          sleep 2
+          echo "Validation complete for ${{ github.event.inputs.featureKey }}"
