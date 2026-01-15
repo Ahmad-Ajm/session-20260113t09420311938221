@@ -1,6 +1,7 @@
-import Header from './Header'
-import Footer from './Footer'
-import Content from './Content'
+import Header from './Header';
+import Footer from './Footer';
+import Content from './Content';
+import './styles.css';
 
 export default function Layout() {
   return (
@@ -9,5 +10,5 @@ export default function Layout() {
       <Content />
       <Footer />
     </div>
-  )
+  );
 }
