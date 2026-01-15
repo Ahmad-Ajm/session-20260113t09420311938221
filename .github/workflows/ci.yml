@@ -1,4 +1,4 @@
-name: CI Test
+name: CI Validation
 
 on:
   workflow_dispatch:
@@ -13,9 +13,19 @@ on:
         type: string
 
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Test step
-        run: echo "CI test successful for ${{ github.event.inputs.featureKey }}"
+      - name: Validate feature
+        run: |
+          echo "Validating ${{ github.event.inputs.featureKey }}"
+          echo "Checking file structure..."
+          
+          # Simple file check
+          if [ -d "code" ]; then
+            echo "✅ Code directory exists"
+            echo "File count: $(find code -type f | wc -l) files"
+          else
+            echo "❌ Code directory not found"
+          fi
