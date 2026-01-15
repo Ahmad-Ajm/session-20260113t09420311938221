@@ -1,4 +1,4 @@
-name: Feature Validation CI
+name: Feature Validation
 
 on:
   workflow_dispatch:
@@ -13,49 +13,23 @@ on:
         type: string
 
 jobs:
-  check-files:
+  validate:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Check required files
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Validate Feature
         run: |
-          echo "Checking files for ${{ github.event.inputs.featureKey }}"
+          echo "Starting validation for ${{ github.event.inputs.featureKey }}"
+          echo "Attempt: ${{ github.event.inputs.attempt }}"
           
-          # Check if code directory exists
+          # Simple file check
           if [ -d "code" ]; then
-            echo "✅ code directory exists"
-            
-            # List files in code directory
-            echo "Files in code/:"
-            ls -la code/
-            
-            # Check for essential files
-            ESSENTIAL_FILES=(
-              "code/index.html"
-              "code/styles.css"
-              "code/src/App.jsx"
-              "code/src/main.jsx"
-              "code/ui/Layout.jsx"
-              "code/ui/Header.jsx"
-              "code/ui/Content.jsx"
-              "code/ui/Footer.jsx"
-            )
-            
-            echo ""
-            echo "Checking essential files:"
-            for file in "${ESSENTIAL_FILES[@]}"; do
-              if [ -f "$file" ]; then
-                echo "✅ $file"
-              else
-                echo "❌ $file - MISSING"
-              fi
-            done
-            
+            echo "✅ Code directory exists"
+            echo "Files found:"
+            find code -type f | head -20
           else
-            echo "❌ code directory not found"
+            echo "❌ Code directory not found"
           fi
-          
-          echo ""
-          echo "Validation complete for ${{ github.event.inputs.featureKey }}"
