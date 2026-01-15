@@ -1,10 +1,10 @@
-name: Feature Validation
+name: Feature Validation CI
 
 on:
   workflow_dispatch:
     inputs:
       featureKey:
-        description: 'Feature key to validate'
+        description: 'Feature key'
         required: true
         type: string
       attempt:
@@ -13,16 +13,49 @@ on:
         type: string
 
 jobs:
-  validate:
+  check-files:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        
-      - name: Simple validation
+      - uses: actions/checkout@v4
+      
+      - name: Check required files
         run: |
-          echo "=== Validating ${{ github.event.inputs.featureKey }} ==="
-          echo "All files in repository:"
-          find . -type f -name "*.html" -o -name "*.css" -o -name "*.jsx" -o -name "*.js" | sort
-          echo "=== Validation complete ==="
+          echo "Checking files for ${{ github.event.inputs.featureKey }}"
+          
+          # Check if code directory exists
+          if [ -d "code" ]; then
+            echo "✅ code directory exists"
+            
+            # List files in code directory
+            echo "Files in code/:"
+            ls -la code/
+            
+            # Check for essential files
+            ESSENTIAL_FILES=(
+              "code/index.html"
+              "code/styles.css"
+              "code/src/App.jsx"
+              "code/src/main.jsx"
+              "code/ui/Layout.jsx"
+              "code/ui/Header.jsx"
+              "code/ui/Content.jsx"
+              "code/ui/Footer.jsx"
+            )
+            
+            echo ""
+            echo "Checking essential files:"
+            for file in "${ESSENTIAL_FILES[@]}"; do
+              if [ -f "$file" ]; then
+                echo "✅ $file"
+              else
+                echo "❌ $file - MISSING"
+              fi
+            done
+            
+          else
+            echo "❌ code directory not found"
+          fi
+          
+          echo ""
+          echo "Validation complete for ${{ github.event.inputs.featureKey }}"
