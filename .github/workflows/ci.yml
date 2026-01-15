@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI Test
 
 on:
   workflow_dispatch:
@@ -17,9 +17,5 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Check files
-        run: |
-          echo "Testing CI for ${{ github.event.inputs.featureKey }}"
-          echo "Files in repository:"
-          ls -la
-          echo "Test successful!"
+      - name: Test step
+        run: echo "CI test successful for ${{ github.event.inputs.featureKey }}"
