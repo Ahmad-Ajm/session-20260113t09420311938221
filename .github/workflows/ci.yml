@@ -1,4 +1,4 @@
-name: Feature Validation
+name: Feature Validation CI
 
 on:
   workflow_dispatch:
@@ -13,23 +13,16 @@ on:
         type: string
 
 jobs:
-  validate:
+  check:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
-      - name: Validate Feature
+      - run: echo "Validating ${{ github.event.inputs.featureKey }}"
+      
+      - name: Check files
         run: |
-          echo "Starting validation for ${{ github.event.inputs.featureKey }}"
-          echo "Attempt: ${{ github.event.inputs.attempt }}"
-          
-          # Simple file check
-          if [ -d "code" ]; then
-            echo "✅ Code directory exists"
-            echo "Files found:"
-            find code -type f | head -20
-          else
-            echo "❌ Code directory not found"
-          fi
+          echo "Files in repository:"
+          ls -la
+          echo ""
+          echo "Files in code directory:"
+          ls -la code/ || echo "No code directory"
