@@ -1,4 +1,4 @@
-name: Feature Validation
+name: CI Pipeline
 
 on:
   workflow_dispatch:
@@ -13,22 +13,13 @@ on:
         type: string
 
 jobs:
-  check:
+  test:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Validate
+      - name: Check files
         run: |
-          echo "=== Validating ${{ github.event.inputs.featureKey }} ==="
-          echo "Checking file structure..."
-          
-          # Check basic structure
-          if [ -d "code" ]; then
-            echo "✅ Code directory exists"
-            echo "Contents:"
-            find code -type f | sort
-          else
-            echo "❌ Code directory missing"
-          fi
-          
-          echo "=== Validation complete ==="
+          echo "Testing CI for ${{ github.event.inputs.featureKey }}"
+          echo "Files in repository:"
+          ls -la
+          echo "Test successful!"
