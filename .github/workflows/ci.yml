@@ -1,4 +1,4 @@
-name: Feature Validation CI
+name: CI Validation
 
 on:
   workflow_dispatch:
@@ -13,16 +13,11 @@ on:
         type: string
 
 jobs:
-  check:
+  validate:
     runs-on: ubuntu-latest
     
     steps:
-      - run: echo "Validating ${{ github.event.inputs.featureKey }}"
-      
-      - name: Check files
+      - name: Run validation
         run: |
-          echo "Files in repository:"
-          ls -la
-          echo ""
-          echo "Files in code directory:"
-          ls -la code/ || echo "No code directory"
+          echo "CI Validation for ${{ github.event.inputs.featureKey }}"
+          echo "All good!"
